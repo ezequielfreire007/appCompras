@@ -35,18 +35,29 @@
         <input type="number" class="form-control" id="telefono" ngModel name="telefono">
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" ngModel name="email">
+        <label for="email">Email(*)</label>
+        <i class="fa fa-check-circle check" *ngIf="email.valid"></i>
+        <i class="fa fa-exclamation-circle uncheck" *ngIf="email.invalid && email.touched"></i>
+        <input type="email" class="form-control" id="email" ngModel name="email" required email #email="ngModel">
+        <p class="alert alert-danger" *ngIf="email.invalid && email.touched">Por favor ingrese una direccion de correo valida</p>
       </div>
       <div class="form-group">
         <label for="contacto">Contacto</label>
         <input type="text" class="form-control" id="contacto" ngModel name="contacto">
       </div>
-      <button type="submit" class="btn btn-success">Agregar Proveedor</button>
+      <button type="submit" class="btn btn-success" [disabled]="!formpro.valid">Agregar Proveedor</button>
+      <p class="alert alert-danger" *ngIf="!formpro.validad">Por favor complete los campos obligatorios</p>
       <hr>
       <pre>
         {{proveedor | json}}
       </pre>
+
+      <h4>Estado dirty: {{formpro.controls.email.dirty}}</h4>
+      <h4>Estado pristine: {{formpro.controls.email.pristine}}</h4>
+      <h4>Estado touched: {{formpro.controls.email.touched}}</h4>
+      <h4>Estado valid: {{formpro.controls.email.valid}}</h4>
+      <h4>Estado invalid: {{formpro.controls.email.invalid}}</h4>
+
     </form>
   </div>
   <div class="col col-md "></div>
